@@ -9,7 +9,7 @@ class CLIPEmbedding(nn.Module):
     def __init__(self, n_vocab: int, n_embd: int, n_tokens: int):
         super().__init__()
         self.token_embedding = nn.Embedding(n_vocab, n_embd)
-        self.positon_embedding = nn.Parameter(th.zeros(n_tokens, n_embd))
+        self.position_embedding = nn.Parameter(th.zeros(n_tokens, n_embd))
 
     def forward(self, tokens):
         # (batch_size, seq_len) -> (batch_size, seq_len, dim)
@@ -61,6 +61,7 @@ class CLIPLayer(nn.Module):
 class CLIP(nn.Module):
 
     def __init__(self):
+        super().__init__()
         self.embedding = CLIPEmbedding(49408, 768, 77)
 
         self.layers = nn.ModuleList(
