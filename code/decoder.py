@@ -110,9 +110,9 @@ class VAE_Decoder(nn.Sequential):
             
             nn.Conv2d(in_channels=256, out_channels=256, kernel_size=3, padding=1),
 
-            VAE_ResidualBlock(256, 256),
-            VAE_ResidualBlock(256, 256),
-            VAE_ResidualBlock(256, 256),
+            VAE_ResidualBlock(256, 128),
+            VAE_ResidualBlock(128, 128),
+            VAE_ResidualBlock(128, 128),
 
             nn.GroupNorm(32, 128),
 
