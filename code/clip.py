@@ -7,9 +7,9 @@ from attention import SelfAttention
 
 class CLIPEmbedding(nn.Module):
     def __init__(self, n_vocab: int, n_embd: int, n_tokens: int):
-        
+        super().__init__()
         self.token_embedding = nn.Embedding(n_vocab, n_embd)
-        self.positon_embedding = nn.Parameters(th.zeros(n_tokens, n_embd))
+        self.positon_embedding = nn.Parameter(th.zeros(n_tokens, n_embd))
 
     def forward(self, tokens):
         # (batch_size, seq_len) -> (batch_size, seq_len, dim)
@@ -63,7 +63,7 @@ class CLIP(nn.Module):
     def __init__(self):
         self.embedding = CLIPEmbedding(49408, 768, 77)
 
-        self.layers = nn.Module(
+        self.layers = nn.ModuleList(
             [
                 CLIPLayer(12, 768) for _ in range(12)
             ]
