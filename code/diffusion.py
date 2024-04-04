@@ -95,11 +95,9 @@ class UNET(nn.Module):
         )
 
         self.bottle_neck = SwitchSequential(
-            [
-                UNET_ResidualBlock(1280, 1280),
-                UNET_AttentionBlock(8, 160),
-                UNET_ResidualBlock(1280, 1280),
-            ]
+            UNET_ResidualBlock(1280, 1280),
+            UNET_AttentionBlock(8, 160),
+            UNET_ResidualBlock(1280, 1280),
         )
 
         self.encoders = nn.ModuleList(
